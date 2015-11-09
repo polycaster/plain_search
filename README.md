@@ -3,7 +3,27 @@ PlainSearch
 
 PlainSearch is a simple, scored search plugin for single ActiveRecord 
 models. Suited for small projects with little needs for scalability 
-and a reserved attitude towards technical debt (i.e. ElasticSearch, Solr, ...).
+and a reserved attitude towards technical debt.
+
+It has little complexity and is small in size, so you can read and comprehend
+the code in a couple of minutes. 
+
+If you are, however, looking for a scalable and high-performance solution, have 
+a look at this projects instead:
+ 
+ - [elasticsearch-rails](https://github.com/elastic/elasticsearch-rails)
+ - [sunspot](https://github.com/sunspot/sunspot)
+
+Requirements
+------------
+ - activerecord
+ - MySQL
+ 
+Obviously you'll need activerecord. I've tested with 4.2.4, but in principle it 
+should work with older versions down to 2.x as well. After all, PlainSearch is 
+basically a decorator around `#find_by_sql` and uses `#after_save` and 
+`#attribute_changed?` to interact with the model. 
+
 
 Quick Start
 -----------
@@ -67,7 +87,9 @@ Now, with all the setup done, performing a search is pretty straight-forward:
 `matches` contains a list of `Employee`s, ordered by the search score, which is
 also available as an attribute (e.q. `matches[0].score`).
 
-### Rebuilding search terms
+
+Rebuilding search terms
+-----------------------
 
 In the background, whenever you create or update a model on which 
 `searchable_by` was called, the searchable fields' contents will be cached in the 
@@ -77,8 +99,13 @@ You'll have to rebuild the cache for this models manually using
 `#rebuild_search_terms_for_all` like so: 
 
     Employee.rebuild_search_terms_for_all
+    
+Alternatively there's also a Rake task for re-building the cache:   
+    
+    rake plain_search:rebuild_terms CLASS=Employee
 
-### Performing updates without caching search terms
+Performing updates without caching search terms
+-----------------------------------------------
 
 Let's say you have a scenario which performs a lot of updates to a specific 
 model. Every insertion or update would result in `SearchTerm`s being build for
@@ -96,16 +123,17 @@ An example:
      Employee.update_all({some_non_searchable_attribute: 42})
     end
  
-Therefore changes to searchable attributes within won't be reflected in the search 
-results. So you should make sure that you either rebuild the search terms 
-afterwards (e.q. using ActiveJob) or make sure no searchable attributes have 
-been touched in the operation. 
+Therefore changes to searchable attributes within this block won't be reflected 
+in the search results. So you should make sure that you either rebuild the 
+search terms afterwards (e.q. using ActiveJob) or make sure no searchable 
+attributes have been touched in the operation. 
 
 Alternatively you could set `Model#auto_update_search_terms` to `true`/`false`, 
 which is basically what `#without_search_term_updates` does, but in a less 
 error-prone manner.  
 
-### Search term delimiter
+Search term delimiter
+---------------------
 
 Values of searchable attributes are split into search terms using a regular
 expression. This is `/[^\w\u00C0-\u00ff]/` by default. You can adjust it

@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Andreas Baumgart"]
   s.email       = ["andreas@baumgart.software"]
   s.homepage    = "https://github.com/polycaster/plain_search"
-  s.summary     = "A simple scored search plugin for ActiveRecord models. Suited for small projects with little needs for scalability and a reserved attitude towards technical debt (i.e. ElasticSearch, Solr, ...)."
-  s.description = "A simple scored search plugin for ActiveRecord models. Suited for small projects with little needs for scalability and a reserved attitude towards technical debt (i.e. ElasticSearch, Solr, ...)."
+  s.summary     = "A simple scored search plugin for ActiveRecord models. Suited for small projects with little needs for scalability and a reserved attitude towards technical debt."
+  s.description = "A simple scored search plugin for ActiveRecord models. Suited for small projects with little needs for scalability and a reserved attitude towards technical debt."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
