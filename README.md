@@ -163,4 +163,5 @@ for the matching first name and 5 for the matching profession.
 
 License
 -------
-See [MIT-LICENSE](MIT-LICENSE)
+
+PlainSearch is released under the [MIT License](MIT-LICENSE).
