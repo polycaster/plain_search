@@ -3,6 +3,7 @@ PlainSearch
 
 [![Gem Version](https://badge.fury.io/rb/plain_search.svg)](https://badge.fury.io/rb/plain_search)
 [![GitHub version](https://badge.fury.io/gh/polycaster%2Fplain_search.svg)](https://badge.fury.io/gh/polycaster%2Fplain_search)
+[![Build Status](https://travis-ci.org/polycaster/plain_search.svg?branch=master)](https://travis-ci.org/polycaster/plain_search)
 
 PlainSearch is a simple, scored search plugin for single ActiveRecord 
 models. Suited for small projects with little needs for scalability 
