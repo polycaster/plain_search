@@ -103,6 +103,7 @@ PLATFORMS
 
 DEPENDENCIES
   plain_search!
+  rake
   sqlite3
 
 BUNDLED WITH
